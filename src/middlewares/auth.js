@@ -15,9 +15,10 @@ const auth = (req, res, next) => {
         req.formattedURL = formatURL(req.url);
         next();
     } catch (error) {
-        // Retorna um erro caso o token esteja inválido ou expirado
+        // remove token se expirou
+        res.clearCookie("token");
+        location.replace('/');
         return res.status(401).json({ error: "Token inválido ou expirado" });
-        // return res.status(301).redirect('/login');
     }
 };
 
