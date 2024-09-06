@@ -7,10 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         const token = getCookie('token');
-        
-        console.log('Form Data:', JSON.stringify(data));
-        console.log('Token:', token);
-        
         try {
             document.querySelector('.error').innerHTML = '';
             const url = data.id && data.id != 0 ? `${apiUrl}/api/users/${data.id}` : `${apiUrl}/api/users`;
@@ -27,8 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Erro na solicitação:', errorText);
+                const errorJson = await response.json(); // Converte a resposta para JSON
+                console.error('Erro na solicitação: ', errorJson);
+                document.querySelector('.error').innerHTML ='Erro ao enviar solicitação: ' + errorJson.msg;
                 return;
             }
 
