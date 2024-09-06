@@ -39,30 +39,39 @@ router.get('/api/users/:id', auth, async (req, res) => {
 });
 
 router.post('/api/users', auth, async (req, res) => {
-    // Dados do formulário HTML
-    const {
-        name,
-        email,
-        password,
-        cep,
-        street,
-        neighborhood,
-        city,
-        state
-    } = req.body;
+    try {
+        // Dados do formulário HTML
+        const {
+            name,
+            email,
+            password,
+            cep,
+            street,
+            neighborhood,
+            city,
+            state
+        } = req.body;
 
-    const user = await User.findOne({
-        where: {
-            name
+        const user = await User.findOne({
+            where: {
+                email
+            }
+        });
+        
+
+        if(!name || !email || !password || !cep || !street || !neighborhood || !city || !state){
+            return res.status(400).json({
+                msg: "Informe todos os campos",
+                err: "Informe todos os campos"
+            });
         }
-    });
 
-    // if(user){
-    //     res.status(400).json({
-    //         msg: "Email já cadastrado",
-    //         err: "Email já cadastrado"
-    //     });
-    // }
+        if(user){
+            return res.status(400).json({
+                msg: "Email já cadastrado",
+                err: "Email já cadastrado"
+            });
+        }
 
     // Inserção de um usuário no banco
     try {
@@ -77,12 +86,12 @@ router.post('/api/users', auth, async (req, res) => {
             state
         });
 
-        res.status(201).json({
+        return res.status(201).json({
             msg: "Usuário cadastrado",
             newUser
         });
     } catch(err) {
-        res.status(500).json({
+        return res.status(500).json({
             msg: "Erro ao cadastrar Usuário",
             err
         });
@@ -106,6 +115,13 @@ router.put('/api/users/:id', auth, async(req, res) => {
             city,
             state
         } = req.body;
+
+        if(!name || !email || !password || !cep || !street || !neighborhood || !city || !state || !id){
+            return res.status(400).json({
+                msg: "Informe todos os campos",
+                err: "Informe todos os campos"
+            });
+        }
 
         // Atualização do Usuário
         const updatedUser = await User.update(
