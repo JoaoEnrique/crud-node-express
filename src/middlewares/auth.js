@@ -17,7 +17,7 @@ const auth = (req, res, next) => {
     } catch (error) {
         // remove token se expirou
         res.clearCookie("token");
-        location.replace('/');
+        res.redirect('/')
         return res.status(401).json({ error: "Token inválido ou expirado" });
     }
 };
