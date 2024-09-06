@@ -64,7 +64,7 @@ router.post('/api/users', auth, async (req, res) => {
     //     });
     // }
 
-    // IInserção de um usuário no banco
+    // Inserção de um usuário no banco
     try {
         const newUser = await User.create({
             name,
