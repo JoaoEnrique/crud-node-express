@@ -6,13 +6,14 @@ router.get('/api/cep/:cep', async (req, res) => {
     try {
         const cep = req.params.cep.replace(/\D/g, '');
         const startTime = process.hrtime(); // Tempo de início da operação
+        let time;
 
         // Verificar se o CEP já está no cache
         if (cepCache[cep]) {
             const cacheEndTime = process.hrtime(startTime); // Tempo após a verificação do cache
             const cacheTime = (cacheEndTime[0] * 1000) + (cacheEndTime[1] / 1e6); // Tempo em milissegundos
-            console.log('CACHE: ' + cacheTime);
-            return res.json(cepCache[cep]);
+            time = 'CACHE: ' + cacheTime
+            return res.json({cep: cepCache[cep], time});
         }
         const fetchStartTime = process.hrtime();// Tempo para a requisição externa
 
@@ -25,9 +26,9 @@ router.get('/api/cep/:cep', async (req, res) => {
             return res.status(500).json({ msg: "CEP não encontrado", err: data.erro });
         
         cepCache[cep] = data;
-        console.log(`API: ${fetchTime} ms`);
+        time = `API: ${fetchTime} ms`;
 
-        res.json(data);
+        res.json({cep: data, time});
     } catch(err) {
         console.error(err);
         

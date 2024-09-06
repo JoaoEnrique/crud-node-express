@@ -1,4 +1,4 @@
-# Projeto Frontend - Cadastro de Pessoas com ViaCEP e Autenticação JWT
+# Projeto Backend - Cadastro de Pessoas com ViaCEP e Autenticação JWT
 
 Este é o backend do mini projeto de cadastro de pessoas com autenticação JWT e busca de CEP utilizando a API do ViaCEP. O backend utiliza um padrão Proxy para armazenar resultados de CEP em cache para evitar consultas repetidas à API externa.
 
