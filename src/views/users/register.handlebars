@@ -1,0 +1,37 @@
+<script src="../../js/user/handleAddUser.js"></script>
+<script src="../../js/user/handleViaCep.js"></script>
+
+<div class="w-screen bg-gray-background flex items-center justify-center" style="min-height: calc(100vh);">
+    <div class="bg-white p-4 w-480 rounded-md flex justify-center items-center flex-col shadow-lg gap-y-2.5">
+        <h3 class="title">
+            {{#if user.street}}
+                Editar
+            {{else}}
+                Cadastrar
+            {{/if}} 
+            Usuário
+        </h3>
+        <form class="grid grid-cols-2 gap-4" action="">
+            <input value="{{user.id}}" type="hidden" placeholder="id" class="input-facebook" name="id">
+            <input value="{{user.name}}" type="text" placeholder="Nome" class="input-facebook" name="name">
+            <input value="{{user.email}}" type="text" placeholder="Email" class="input-facebook" name="email">
+            <input value="{{user.password}}" type="password" placeholder="Senha" class="mb-4 col-span-2 input-facebook" name="password">
+            
+            <input value="{{user.cep}}" type="text" placeholder="CEP" class="col-span-2 input-facebook" name="cep" id="cep">
+            <input value="{{user.street}}" type="text" placeholder="Rua" class="input-facebook" name="street" name="street">
+            <input value="{{user.neighborhood}}" type="text" placeholder="Bairro" class="input-facebook" name="neighborhood" id="neighborhood">
+            <input value="{{user.city}}" type="text" placeholder="Cidade" class="input-facebook" name="city" id="city">
+            <input value="{{user.state}}" type="text" placeholder="Estado" class="input-facebook" name="state" id="state">
+            
+            <span class="error text-red-500 block mb-2 font-bold"></span>
+
+            <button type="submit" class="col-span-2 h-12 w-full bg-red-800 rounded-md text-white">
+                {{#if user.street}}
+                    Editar
+                {{else}}
+                    Cadastrar
+                {{/if}}
+            </button>
+        </form>
+    </div>
+</div>
