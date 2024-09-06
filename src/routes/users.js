@@ -57,6 +57,7 @@ router.post('/api/users', auth, async (req, res) => {
                 email
             }
         });
+        
 
         if(!name || !email || !password || !cep || !street || !neighborhood || !city || !state){
             return res.status(400).json({
