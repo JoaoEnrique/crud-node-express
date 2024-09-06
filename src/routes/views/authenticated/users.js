@@ -11,8 +11,6 @@ router.get('/', auth, (req, res) => {
 router.get('/users/list', auth, async (req, res) => {
     try {
         const { token } = req.cookies;
-        console.log(token);
-        
         const { formattedURL } = req;
         const response = await axios(`http://localhost:5000/api/users`, {
             headers: {
@@ -24,7 +22,7 @@ router.get('/users/list', auth, async (req, res) => {
         res.render(formattedURL, {
             title: 'Usuários',
             token,
-            funcionarios: users,
+            users: users,
             apiUrl: process.env.API_URL
         });
     } catch(err) {

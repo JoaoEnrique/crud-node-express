@@ -12,9 +12,12 @@
     <meta name="api-url" content="{{apiUrl}}">
 </head>
 <body>
+    {{#if token}}
+        {{> navbar}}
+    {{/if}}
     {{{body}}}
-    {{> footer}}<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
-
+    {{> footer}}
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 </html>
