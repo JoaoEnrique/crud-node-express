@@ -8,6 +8,11 @@ router.get('/', auth, (req, res) => {
     res.redirect('/users/list')
 });
 
+router.get('/logout', auth, (req, res) => {
+    res.clearCookie("token");
+    res.redirect('/')
+});
+
 router.get('/users/list', auth, async (req, res) => {
     try {
         const { token } = req.cookies;
