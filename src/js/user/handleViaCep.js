@@ -13,10 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(data.err)
                     throw Error(data.err)
 
-                document.querySelector('input[name="street"]').value = data.logradouro || '';
-                document.querySelector('input[name="neighborhood"]').value = data.bairro || '';
-                document.querySelector('input[name="city"]').value = data.localidade || '';
-                document.querySelector('input[name="state"]').value = data.uf || '';
+                document.querySelector('input[name="street"]').value = data.cep.logradouro || '';
+                document.querySelector('input[name="neighborhood"]').value = data.cep.bairro || '';
+                document.querySelector('input[name="city"]').value = data.cep.localidade || '';
+                document.querySelector('input[name="state"]').value = data.cep.uf || '';
+
+                console.log(data.time);
+                
             } catch (error) {
                 document.querySelector('.error').innerHTML ='Erro ao buscar CEP:' + error;
                 console.error('Erro ao buscar CEP:', error);
